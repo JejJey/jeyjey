@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JeyJey</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+    .hero, .card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+    .tag {
+      display: inline-block;
+      background: #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .box {
+      background: #f1f5f9;
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .good {
+      background: #ecfdf5;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="tag">JeyJey</div>
+      <h1>Düşük Riskli Market Analiz Paneli</h1>
+      <p>
+        Bu ilk ücretsiz sürüm. Amaç en yüksek oranı değil, en düşük riskli marketi göstermek.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="tag">Süper Lig</div>
+      <h2>Galatasaray vs Kasımpaşa</h2>
+      <div class="grid">
+        <div class="box good">
+          <strong>En Düşük Riskli Market</strong>
+          <p>1X</p>
+        </div>
+        <div class="box">
+          <strong>Gerçekleşme Olasılığı</strong>
+          <p>%84</p>
+        </div>
+        <div class="box">
+          <strong>Risk Skoru</strong>
+          <p>2.1 / 10</p>
+        </div>
+        <div class="box">
+          <strong>Güven Skoru</strong>
+          <p>8.8 / 10</p>
+        </div>
+      </div>
+      <h3>Neden bu market seçildi?</h3>
+      <ul>
+        <li>Ev sahibi iç sahada istikrarlı.</li>
+        <li>Rakip deplasmanda kırılgan.</li>
+        <li>Eksik oyuncu etkisi ev sahibi lehine.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
