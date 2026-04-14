@@ -27,41 +27,122 @@ jobs:
           cat > scripts/fetchMatches.js <<'EOF'
           const fs = require("fs");
 
+          const competitions = ["PL", "PD", "SA", "BL1", "DED"];
+
+          function formToScore(form) {
+            if (!form) return 0;
+            return form
+              .split(",")
+              .map(x => x.trim())
+              .reduce((sum, result) => {
+                if (result === "W") return sum + 3;
+                if (result === "D") return sum + 1;
+                return sum;
+              }, 0);
+          }
+
+          function getSafeSuggestion(home, away) {
+            const rankDiff = (home.position || 99) - (away.position || 99);
+            const formDiff = (home.formScore || 0) - (away.formScore || 0);
+
+            if (rankDiff <= -5 && formDiff >= 2) {
+              return {
+                market: "1X",
+                reason: "Ev sahibi sıralama ve form avantajına sahip."
+              };
+            }
+
+            if (rankDiff >= 5 && formDiff <= -2) {
+              return {
+                market: "X2",
+                reason: "Deplasman ekibi sıralama ve form avantajına sahip."
+              };
+            }
+
+            if (Math.abs(rankDiff) <= 3 && Math.abs(formDiff) <= 2) {
+              return {
+                market: "3.5 Alt",
+                reason: "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali yüksek."
+              };
+            }
+
+            return {
+              market: "1.5 Üst",
+              reason: "Maç dengeli değil, en güvenli erken yaklaşım toplam gol tarafı."
+            };
+          }
+
+          async function fetchJson(url, apiKey) {
+            const response = await fetch(url, {
+              headers: { "X-Auth-Token": apiKey }
+            });
+
+            if (!response.ok) {
+              throw new Error(`İstek başarısız: ${url} (${response.status})`);
+            }
+
+            return response.json();
+          }
+
           async function run() {
             const apiKey = process.env.FOOTBALL_DATA_API_KEY;
-
-            const competitions = ["PL", "PD", "SA", "BL1", "DED"];
             const allMatches = [];
 
             for (const code of competitions) {
-              const url = `https://api.football-data.org/v4/competitions/${code}/matches?status=SCHEDULED`;
+              try {
+                const matchesUrl = `https://api.football-data.org/v4/competitions/${code}/matches?status=SCHEDULED`;
+                const standingsUrl = `https://api.football-data.org/v4/competitions/${code}/standings`;
 
-              const response = await fetch(url, {
-                headers: {
-                  "X-Auth-Token": apiKey
+                const matchesData = await fetchJson(matchesUrl, apiKey);
+                const standingsData = await fetchJson(standingsUrl, apiKey);
+
+                const table = standingsData.standings?.find(s => s.type === "TOTAL")?.table || [];
+
+                const teamMap = {};
+                for (const row of table) {
+                  const teamId = row.team?.id;
+                  if (!teamId) continue;
+
+                  teamMap[teamId] = {
+                    position: row.position || null,
+                    form: row.form || "",
+                    formScore: formToScore(row.form || "")
+                  };
                 }
-              });
 
-              if (!response.ok) {
-                console.log(`Hata: ${code} verisi alınamadı`);
-                continue;
+                const simplified = (matchesData.matches || []).slice(0, 10).map(match => {
+                  const homeId = match.homeTeam?.id;
+                  const awayId = match.awayTeam?.id;
+
+                  const homeStats = teamMap[homeId] || {};
+                  const awayStats = teamMap[awayId] || {};
+
+                  const suggestion = getSafeSuggestion(homeStats, awayStats);
+
+                  return {
+                    league: matchesData.competition?.name || code,
+                    utcDate: match.utcDate,
+                    homeTeam: match.homeTeam?.name || "Bilinmiyor",
+                    awayTeam: match.awayTeam?.name || "Bilinmiyor",
+                    homePosition: homeStats.position || null,
+                    awayPosition: awayStats.position || null,
+                    homeForm: homeStats.form || "-",
+                    awayForm: awayStats.form || "-",
+                    homeFormScore: homeStats.formScore || 0,
+                    awayFormScore: awayStats.formScore || 0,
+                    suggestion: suggestion.market,
+                    suggestionReason: suggestion.reason
+                  };
+                });
+
+                allMatches.push(...simplified);
+              } catch (error) {
+                console.log(`${code} alınamadı: ${error.message}`);
               }
-
-              const data = await response.json();
-
-              const simplified = (data.matches || []).slice(0, 10).map(match => ({
-                league: data.competition?.name || code,
-                utcDate: match.utcDate,
-                homeTeam: match.homeTeam?.name || "Bilinmiyor",
-                awayTeam: match.awayTeam?.name || "Bilinmiyor"
-              }));
-
-              allMatches.push(...simplified);
             }
 
             fs.mkdirSync("data", { recursive: true });
             fs.writeFileSync("data/matches.json", JSON.stringify(allMatches, null, 2), "utf8");
-
             console.log("matches.json güncellendi");
           }
 
@@ -81,5 +162,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/matches.json
-          git diff --cached --quiet || git commit -m "otomatik mac verisi guncellendi"
+          git diff --cached --quiet || git commit -m "gelismis mac verisi guncellendi"
           git push
