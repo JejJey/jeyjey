@@ -1,171 +1,342 @@
-name: Fetch Football Matches
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JeyJey</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 */6 * * *"
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef3f9;
+      color: #0f172a;
+    }
 
-permissions:
-  contents: write
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
 
-jobs:
-  fetch:
-    runs-on: ubuntu-latest
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      padding: 36px;
+      border-radius: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+    }
 
-    steps:
-      - name: Repo'yu çek
-        uses: actions/checkout@v4
+    .brand {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
 
-      - name: Node kur
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: 40px;
+    }
 
-      - name: Script dosyasını oluştur
-        run: |
-          mkdir -p scripts
-          cat > scripts/fetchMatches.js <<'EOF'
-          const fs = require("fs");
+    .hero p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #dbeafe;
+      max-width: 780px;
+    }
 
-          const competitions = ["PL", "PD", "SA", "BL1", "DED"];
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
 
-          function formToScore(form) {
-            if (!form) return 0;
-            return form
-              .split(",")
-              .map(x => x.trim())
-              .reduce((sum, result) => {
-                if (result === "W") return sum + 3;
-                if (result === "D") return sum + 1;
-                return sum;
-              }, 0);
-          }
+    .stat-box, .filter-box, .footer-box, .loading-box, .empty-box {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
 
-          function getSafeSuggestion(home, away) {
-            const rankDiff = (home.position || 99) - (away.position || 99);
-            const formDiff = (home.formScore || 0) - (away.formScore || 0);
+    .stat-label {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
 
-            if (rankDiff <= -5 && formDiff >= 2) {
-              return {
-                market: "1X",
-                reason: "Ev sahibi sıralama ve form avantajına sahip."
-              };
-            }
+    .stat-value {
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-            if (rankDiff >= 5 && formDiff <= -2) {
-              return {
-                market: "X2",
-                reason: "Deplasman ekibi sıralama ve form avantajına sahip."
-              };
-            }
+    .section-title {
+      font-size: 28px;
+      margin: 28px 0 10px 0;
+    }
 
-            if (Math.abs(rankDiff) <= 3 && Math.abs(formDiff) <= 2) {
-              return {
-                market: "3.5 Alt",
-                reason: "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali yüksek."
-              };
-            }
+    .section-subtitle {
+      color: #475569;
+      margin-bottom: 18px;
+    }
 
-            return {
-              market: "1.5 Üst",
-              reason: "Maç dengeli değil, en güvenli erken yaklaşım toplam gol tarafı."
-            };
-          }
+    .filter-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-          async function fetchJson(url, apiKey) {
-            const response = await fetch(url, {
-              headers: { "X-Auth-Token": apiKey }
-            });
+    .filter-box label {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
 
-            if (!response.ok) {
-              throw new Error(`İstek başarısız: ${url} (${response.status})`);
-            }
+    .filter-box select {
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 15px;
+      background: #f8fafc;
+    }
 
-            return response.json();
-          }
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
 
-          async function run() {
-            const apiKey = process.env.FOOTBALL_DATA_API_KEY;
-            const allMatches = [];
+    .match-card {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      border: 1px solid #e2e8f0;
+    }
 
-            for (const code of competitions) {
-              try {
-                const matchesUrl = `https://api.football-data.org/v4/competitions/${code}/matches?status=SCHEDULED`;
-                const standingsUrl = `https://api.football-data.org/v4/competitions/${code}/standings`;
+    .league-tag {
+      display: inline-block;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
 
-                const matchesData = await fetchJson(matchesUrl, apiKey);
-                const standingsData = await fetchJson(standingsUrl, apiKey);
+    .match-title {
+      font-size: 24px;
+      margin: 0 0 14px 0;
+      line-height: 1.4;
+    }
 
-                const table = standingsData.standings?.find(s => s.type === "TOTAL")?.table || [];
+    .match-time {
+      font-size: 15px;
+      color: #475569;
+      margin-bottom: 14px;
+    }
 
-                const teamMap = {};
-                for (const row of table) {
-                  const teamId = row.team?.id;
-                  if (!teamId) continue;
+    .match-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
 
-                  teamMap[teamId] = {
-                    position: row.position || null,
-                    points: row.points || 0,
-                    playedGames: row.playedGames || 0,
-                    goalsFor: row.goalsFor || 0,
-                    goalsAgainst: row.goalsAgainst || 0,
-                    goalDifference: row.goalDifference || 0,
-                    form: row.form || "",
-                    formScore: formToScore(row.form || "")
-                  };
-                }
+    .meta-box {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 14px;
+    }
 
-                const simplified = (matchesData.matches || []).slice(0, 10).map(match => {
-                  const homeId = match.homeTeam?.id;
-                  const awayId = match.awayTeam?.id;
+    .meta-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
 
-                  const homeStats = teamMap[homeId] || {};
-                  const awayStats = teamMap[awayId] || {};
+    .meta-value {
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-                  const suggestion = getSafeSuggestion(homeStats, awayStats);
+    .footer-box {
+      margin-top: 28px;
+      color: #475569;
+    }
 
-                  return {
-                    league: matchesData.competition?.name || code,
-                    utcDate: match.utcDate,
-                    homeTeam: match.homeTeam?.name || "Bilinmiyor",
-                    awayTeam: match.awayTeam?.name || "Bilinmiyor",
-                    homePosition: homeStats.position || null,
-                    awayPosition: awayStats.position || null,
-                    homeForm: homeStats.form || "-",
-                    awayForm: awayStats.form || "-",
-                    homeFormScore: homeStats.formScore || 0,
-                    awayFormScore: awayStats.formScore || 0,
-                    suggestion: suggestion.market,
-                    suggestionReason: suggestion.reason
-                  };
-                });
+    .empty-box {
+      text-align: center;
+      color: #475569;
+    }
 
-                allMatches.push(...simplified);
-              } catch (error) {
-                console.log(`${code} alınamadı: ${error.message}`);
-              }
-            }
+    @media (max-width: 1000px) {
+      .top-grid,
+      .matches-grid {
+        grid-template-columns: 1fr;
+      }
 
-            fs.mkdirSync("data", { recursive: true });
-            fs.writeFileSync("data/matches.json", JSON.stringify(allMatches, null, 2), "utf8");
-            console.log("matches.json güncellendi");
-          }
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
 
-          run().catch(err => {
-            console.error(err);
-            process.exit(1);
-          });
-          EOF
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
 
-      - name: Maçları çek
-        env:
-          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
-        run: node scripts/fetchMatches.js
+      .hero {
+        padding: 24px;
+      }
 
-      - name: Değişiklikleri kaydet
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/matches.json
-          git diff --cached --quiet || git commit -m "gelismis mac verisi guncellendi"
-          git push
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .match-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="loading-box">Maçlar yükleniyor...</div>
+  </div>
+
+  <script>
+    let allMatches = [];
+
+    function formatDate(utcDate) {
+      const date = new Date(utcDate);
+      return date.toLocaleString("tr-TR", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+    }
+
+    function getUniqueLeagues(matches) {
+      return [...new Set(matches.map(match => match.league))].sort();
+    }
+
+    function renderPage(matches, selectedLeague = "Tümü") {
+      const app = document.getElementById("app");
+      const leagues = getUniqueLeagues(allMatches);
+
+      const filteredMatches =
+        selectedLeague === "Tümü"
+          ? matches
+          : matches.filter(match => match.league === selectedLeague);
+
+      app.innerHTML = `
+        <div class="hero">
+          <div class="brand">JeyJey</div>
+          <h1>Otomatik Maç Paneli</h1>
+          <p>
+            JeyJey artık maç verilerini otomatik çekiyor. Bu sürümde maçları daha düzenli görebilir,
+            lig bazında filtreleyebilir ve yaklaşan karşılaşmaları daha temiz bir panelde inceleyebilirsin.
+          </p>
+        </div>
+
+        <div class="top-grid">
+          <div class="stat-box">
+            <div class="stat-label">Toplam Maç</div>
+            <div class="stat-value">${allMatches.length}</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Gösterilen Maç</div>
+            <div class="stat-value">${filteredMatches.length}</div>
+          </div>
+
+          <div class="filter-box">
+            <label for="leagueFilter">Lig Filtresi</label>
+            <select id="leagueFilter">
+              <option value="Tümü" ${selectedLeague === "Tümü" ? "selected" : ""}>Tümü</option>
+              ${leagues.map(league => `
+                <option value="${league}" ${selectedLeague === league ? "selected" : ""}>
+                  ${league}
+                </option>
+              `).join("")}
+            </select>
+          </div>
+        </div>
+
+        <h2 class="section-title">Yaklaşan Maçlar</h2>
+        <div class="section-subtitle">
+          Aşağıdaki liste otomatik olarak güncellenen maç verilerinden oluşur.
+        </div>
+
+        ${
+          filteredMatches.length === 0
+            ? `<div class="empty-box">Bu filtrede gösterilecek maç bulunamadı.</div>`
+            : `<div class="matches-grid">
+                ${filteredMatches.map(item => `
+                  <div class="match-card">
+                    <div class="league-tag">${item.league}</div>
+                    <h2 class="match-title">${item.homeTeam} vs ${item.awayTeam}</h2>
+                    <div class="match-time">Maç zamanı: ${formatDate(item.utcDate)}</div>
+
+                    <div class="match-meta">
+                      <div class="meta-box">
+                        <div class="meta-label">Ev Sahibi</div>
+                        <div class="meta-value">${item.homeTeam}</div>
+                      </div>
+                      <div class="meta-box">
+                        <div class="meta-label">Deplasman</div>
+                        <div class="meta-value">${item.awayTeam}</div>
+                      </div>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>`
+        }
+
+        <div class="footer-box">
+          Bu panel artık canlı maç listesini gösteriyor. Sıradaki aşamada oran ve düşük risk analiz katmanını ekleyeceğiz.
+        </div>
+      `;
+
+      const leagueFilter = document.getElementById("leagueFilter");
+      if (leagueFilter) {
+        leagueFilter.addEventListener("change", (e) => {
+          renderPage(allMatches, e.target.value);
+        });
+      }
+    }
+
+    async function loadMatches() {
+      const app = document.getElementById("app");
+
+      try {
+        const response = await fetch("./data/matches.json");
+        const matches = await response.json();
+        allMatches = matches;
+        renderPage(allMatches);
+      } catch (error) {
+        app.innerHTML = `
+          <div class="empty-box">
+            Maç verileri yüklenemedi. Biraz sonra tekrar dene.
+          </div>
+        `;
+        console.error(error);
+      }
+    }
+
+    loadMatches();
+  </script>
+</body>
+</html>
