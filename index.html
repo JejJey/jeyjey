@@ -5,92 +5,338 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JeyJey</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f8fafc;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
       color: #0f172a;
     }
-    .wrap {
-      max-width: 1000px;
+
+    .container {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 20px;
+      padding: 24px;
     }
-    .hero, .card {
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      padding: 36px;
+      border-radius: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .brand {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: 42px;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 18px;
+      color: #dbeafe;
+      max-width: 760px;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .stat-box {
       background: white;
       border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 28px 0 10px 0;
+    }
+
+    .section-subtitle {
+      color: #475569;
+      margin-bottom: 18px;
+    }
+
+    .match-card {
+      background: white;
+      border-radius: 24px;
       padding: 24px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     }
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-    .tag {
+
+    .league-tag {
       display: inline-block;
       background: #e2e8f0;
-      padding: 6px 10px;
+      color: #334155;
+      padding: 7px 12px;
       border-radius: 999px;
       font-size: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-    .grid {
+
+    .match-title {
+      font-size: 30px;
+      margin: 0 0 18px 0;
+    }
+
+    .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
     }
-    .box {
-      background: #f1f5f9;
-      border-radius: 16px;
+
+    .info-box {
+      background: #f8fafc;
+      border-radius: 18px;
       padding: 16px;
     }
-    .good {
+
+    .info-box.green {
       background: #ecfdf5;
     }
-    ul {
-      padding-left: 18px;
-      margin-bottom: 0;
+
+    .info-label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .info-value {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .reason-box {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .reason-box h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #475569;
+    }
+
+    .reason-box ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+
+    .footer-box {
+      margin-top: 28px;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      color: #475569;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
+
+    @media (max-width: 900px) {
+      .stats,
+      .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .match-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stats,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <div class="hero">
-      <div class="tag">JeyJey</div>
+      <div class="brand">JeyJey</div>
       <h1>Düşük Riskli Market Analiz Paneli</h1>
       <p>
-        Bu ilk ücretsiz sürüm. Amaç en yüksek oranı değil, en düşük riskli marketi göstermek.
+        JeyJey, en yüksek oranı değil en düşük kırılganlığa sahip marketi bulmak için tasarlanmış kişisel analiz panelidir.
+        Amaç yüksek riskli seçimleri kovalamak değil, daha kontrollü ve daha güvenli karar desteği sunmaktır.
       </p>
     </div>
 
-    <div class="card">
-      <div class="tag">Süper Lig</div>
-      <h2>Galatasaray vs Kasımpaşa</h2>
-      <div class="grid">
-        <div class="box good">
-          <strong>En Düşük Riskli Market</strong>
-          <p>1X</p>
+    <div class="stats">
+      <div class="stat-box">
+        <div class="stat-label">Analiz Edilen Maç</div>
+        <div class="stat-value">3</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Aktif Mod</div>
+        <div class="stat-value">Low Risk</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Ürün Durumu</div>
+        <div class="stat-value">Demo</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Bugünün Seçimleri</h2>
+    <div class="section-subtitle">
+      Şimdilik örnek veri ile çalışan ilk sürüm.
+    </div>
+
+    <div class="match-card">
+      <div class="league-tag">Süper Lig</div>
+      <h2 class="match-title">Galatasaray vs Kasımpaşa</h2>
+
+      <div class="info-grid">
+        <div class="info-box green">
+          <div class="info-label">En Düşük Riskli Market</div>
+          <div class="info-value">1X</div>
         </div>
-        <div class="box">
-          <strong>Gerçekleşme Olasılığı</strong>
-          <p>%84</p>
+        <div class="info-box">
+          <div class="info-label">Gerçekleşme Olasılığı</div>
+          <div class="info-value">%84</div>
         </div>
-        <div class="box">
-          <strong>Risk Skoru</strong>
-          <p>2.1 / 10</p>
+        <div class="info-box">
+          <div class="info-label">Risk Skoru</div>
+          <div class="info-value">2.1</div>
         </div>
-        <div class="box">
-          <strong>Güven Skoru</strong>
-          <p>8.8 / 10</p>
+        <div class="info-box">
+          <div class="info-label">Güven Skoru</div>
+          <div class="info-value">8.8</div>
         </div>
       </div>
-      <h3>Neden bu market seçildi?</h3>
-      <ul>
-        <li>Ev sahibi iç sahada istikrarlı.</li>
-        <li>Rakip deplasmanda kırılgan.</li>
-        <li>Eksik oyuncu etkisi ev sahibi lehine.</li>
-      </ul>
+
+      <div class="reason-box">
+        <h3>Neden bu market seçildi?</h3>
+        <ul>
+          <li>Ev sahibi iç sahada istikrarlı.</li>
+          <li>Rakip deplasmanda kırılgan.</li>
+          <li>Eksik oyuncu etkisi ev sahibi lehine.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="match-card">
+      <div class="league-tag">Premier League</div>
+      <h2 class="match-title">Brighton vs Brentford</h2>
+
+      <div class="info-grid">
+        <div class="info-box green">
+          <div class="info-label">En Düşük Riskli Market</div>
+          <div class="info-value">3.5 Alt</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Gerçekleşme Olasılığı</div>
+          <div class="info-value">%79</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Risk Skoru</div>
+          <div class="info-value">2.9</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Güven Skoru</div>
+          <div class="info-value">8.1</div>
+        </div>
+      </div>
+
+      <div class="reason-box">
+        <h3>Neden bu market seçildi?</h3>
+        <ul>
+          <li>İki takımın son maç profili kontrollü.</li>
+          <li>4+ gol çıkan maç sayısı düşük.</li>
+          <li>Maç temposu orta seviyede bekleniyor.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="match-card">
+      <div class="league-tag">La Liga</div>
+      <h2 class="match-title">Real Sociedad vs Getafe</h2>
+
+      <div class="info-grid">
+        <div class="info-box green">
+          <div class="info-label">En Düşük Riskli Market</div>
+          <div class="info-value">4.5 Alt</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Gerçekleşme Olasılığı</div>
+          <div class="info-value">%88</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Risk Skoru</div>
+          <div class="info-value">1.8</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Güven Skoru</div>
+          <div class="info-value">8.5</div>
+        </div>
+      </div>
+
+      <div class="reason-box">
+        <h3>Neden bu market seçildi?</h3>
+        <ul>
+          <li>Yüksek skorlu maç profili zayıf.</li>
+          <li>Savunma düzeni güçlü görünüyor.</li>
+          <li>Kaotik maç olasılığı düşük.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-box">
+      JeyJey şu anda örnek veri ile çalışan ilk ücretsiz prototiptir. Sonraki adımda bu verileri kolayca değiştirebileceğin daha basit bir sisteme çevireceğiz.
     </div>
   </div>
 </body>
