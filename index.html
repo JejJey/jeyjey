@@ -74,7 +74,7 @@
     }
 
     .stat-value {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: bold;
     }
 
@@ -108,93 +108,28 @@
 
     .match-title {
       font-size: 30px;
-      margin: 0 0 18px 0;
+      margin: 0 0 14px 0;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .info-box {
-      background: #f8fafc;
-      border-radius: 18px;
-      padding: 16px;
-      min-height: 92px;
-    }
-
-    .info-box.green {
-      background: #ecfdf5;
-    }
-
-    .info-box.red {
-      background: #fef2f2;
-    }
-
-    .info-label {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 8px;
-    }
-
-    .info-value {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .reason-box {
-      background: #f8fafc;
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .reason-box h3 {
-      margin-top: 0;
+    .match-time {
       font-size: 16px;
       color: #475569;
+      margin-bottom: 10px;
     }
 
-    .reason-box ul {
-      margin: 0;
-      padding-left: 20px;
-      line-height: 1.8;
+    .empty-box, .loading-box, .footer-box {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     }
 
     .footer-box {
       margin-top: 28px;
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
       color: #475569;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     }
 
-    .edit-box {
-      margin-top: 24px;
-      background: #fff7ed;
-      border: 1px solid #fdba74;
-      border-radius: 20px;
-      padding: 20px;
-      color: #7c2d12;
-    }
-
-    .edit-box h3 {
-      margin-top: 0;
-    }
-
-    .edit-box code {
-      background: rgba(255,255,255,0.7);
-      padding: 2px 6px;
-      border-radius: 6px;
-    }
-
-    @media (max-width: 1000px) {
-      .info-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
+    @media (max-width: 900px) {
       .stats {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -209,8 +144,7 @@
     }
 
     @media (max-width: 600px) {
-      .stats,
-      .info-grid {
+      .stats {
         grid-template-columns: 1fr;
       }
 
@@ -233,147 +167,83 @@
   </style>
 </head>
 <body>
-  <div class="container" id="app"></div>
+  <div class="container" id="app">
+    <div class="loading-box">Maçlar yükleniyor...</div>
+  </div>
 
   <script>
-    const matches = [
-      {
-        league: "Süper Lig",
-        match: "Galatasaray vs Kasımpaşa",
-        safestMarket: "1X",
-        odd: "1.12",
-        probability: "%84",
-        risk: "2.1",
-        confidence: "8.8",
-        avoidMarket: "MS2",
-        reasons: [
-          "Ev sahibi iç sahada istikrarlı.",
-          "Rakip deplasmanda kırılgan.",
-          "Eksik oyuncu etkisi ev sahibi lehine."
-        ]
-      },
-      {
-        league: "Premier League",
-        match: "Brighton vs Brentford",
-        safestMarket: "3.5 Alt",
-        odd: "1.28",
-        probability: "%79",
-        risk: "2.9",
-        confidence: "8.1",
-        avoidMarket: "MS1",
-        reasons: [
-          "İki takımın son maç profili kontrollü.",
-          "4+ gol çıkan maç sayısı düşük.",
-          "Maç temposu orta seviyede bekleniyor."
-        ]
-      },
-      {
-        league: "La Liga",
-        match: "Real Sociedad vs Getafe",
-        safestMarket: "4.5 Alt",
-        odd: "1.18",
-        probability: "%88",
-        risk: "1.8",
-        confidence: "8.5",
-        avoidMarket: "2.5 Üst",
-        reasons: [
-          "Yüksek skorlu maç profili zayıf.",
-          "Savunma düzeni güçlü görünüyor.",
-          "Kaotik maç olasılığı düşük."
-        ]
+    function formatDate(utcDate) {
+      const date = new Date(utcDate);
+      return date.toLocaleString("tr-TR", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+    }
+
+    async function loadMatches() {
+      const app = document.getElementById("app");
+
+      try {
+        const response = await fetch("./data/matches.json");
+        const matches = await response.json();
+
+        app.innerHTML = `
+          <div class="hero">
+            <div class="brand">JeyJey</div>
+            <h1>Otomatik Maç Listesi</h1>
+            <p>
+              JeyJey artık maç verilerini otomatik çekiyor. Bu aşamada sadece maç listesi gösteriliyor.
+              Bir sonraki adımda oran, risk skoru ve analiz katmanını ekleyeceğiz.
+            </p>
+          </div>
+
+          <div class="stats">
+            <div class="stat-box">
+              <div class="stat-label">Toplam Maç</div>
+              <div class="stat-value">${matches.length}</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Veri Kaynağı</div>
+              <div class="stat-value">API</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Durum</div>
+              <div class="stat-value">Canlı Veri</div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Yaklaşan Maçlar</h2>
+          <div class="section-subtitle">
+            Bu liste otomatik olarak güncellenen maç verilerinden oluşturuluyor.
+          </div>
+
+          ${
+            matches.length === 0
+              ? `<div class="empty-box">Şu an gösterilecek maç bulunamadı.</div>`
+              : matches.map(item => `
+                <div class="match-card">
+                  <div class="league-tag">${item.league}</div>
+                  <h2 class="match-title">${item.homeTeam} vs ${item.awayTeam}</h2>
+                  <div class="match-time">Maç zamanı: ${formatDate(item.utcDate)}</div>
+                </div>
+              `).join("")
+          }
+
+          <div class="footer-box">
+            JeyJey'in bu sürümünde veriler otomatik geliyor. Sıradaki adım, bu maçların üzerine oran ve düşük risk analizi eklemek.
+          </div>
+        `;
+      } catch (error) {
+        app.innerHTML = `
+          <div class="empty-box">
+            Maç verileri yüklenemedi. Biraz sonra tekrar dene.
+          </div>
+        `;
+        console.error(error);
       }
-    ];
+    }
 
-    const app = document.getElementById("app");
-
-    app.innerHTML = `
-      <div class="hero">
-        <div class="brand">JeyJey</div>
-        <h1>Düşük Riskli Market Analiz Paneli</h1>
-        <p>
-          JeyJey, en yüksek oranı değil en düşük kırılganlığa sahip marketi bulmak için tasarlanmış kişisel analiz panelidir.
-          Amaç yüksek riskli seçimleri kovalamak değil, daha kontrollü ve daha güvenli karar desteği sunmaktır.
-        </p>
-      </div>
-
-      <div class="stats">
-        <div class="stat-box">
-          <div class="stat-label">Analiz Edilen Maç</div>
-          <div class="stat-value">${matches.length}</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Aktif Mod</div>
-          <div class="stat-value">Low Risk</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Ürün Durumu</div>
-          <div class="stat-value">Demo</div>
-        </div>
-      </div>
-
-      <h2 class="section-title">Bugünün Seçimleri</h2>
-      <div class="section-subtitle">
-        Şimdilik örnek veri ile çalışan ilk sürüm.
-      </div>
-
-      ${matches.map(item => `
-        <div class="match-card">
-          <div class="league-tag">${item.league}</div>
-          <h2 class="match-title">${item.match}</h2>
-
-          <div class="info-grid">
-            <div class="info-box green">
-              <div class="info-label">En Düşük Riskli Market</div>
-              <div class="info-value">${item.safestMarket}</div>
-            </div>
-            <div class="info-box">
-              <div class="info-label">Oran</div>
-              <div class="info-value">${item.odd}</div>
-            </div>
-            <div class="info-box">
-              <div class="info-label">Gerçekleşme Olasılığı</div>
-              <div class="info-value">${item.probability}</div>
-            </div>
-            <div class="info-box">
-              <div class="info-label">Risk Skoru</div>
-              <div class="info-value">${item.risk}</div>
-            </div>
-            <div class="info-box">
-              <div class="info-label">Güven Skoru</div>
-              <div class="info-value">${item.confidence}</div>
-            </div>
-          </div>
-
-          <div class="info-grid" style="grid-template-columns: 1fr;">
-            <div class="info-box red">
-              <div class="info-label">Kaçınılacak Market</div>
-              <div class="info-value">${item.avoidMarket}</div>
-            </div>
-          </div>
-
-          <div class="reason-box">
-            <h3>Neden bu market seçildi?</h3>
-            <ul>
-              ${item.reasons.map(reason => `<li>${reason}</li>`).join("")}
-            </ul>
-          </div>
-        </div>
-      `).join("")}
-
-      <div class="footer-box">
-        JeyJey şu anda örnek veri ile çalışan ilk ücretsiz prototiptir. Sonraki adımda bu verileri daha kolay değiştirebileceğin basit bir düzene çevireceğiz.
-      </div>
-
-      <div class="edit-box">
-        <h3>Nasıl düzenleyeceksin?</h3>
-        <p>
-          Bundan sonra yeni maç eklemek için sadece kod içindeki <code>const matches = [ ]</code> bölümünü düzenleyeceğiz.
-        </p>
-        <p>
-          Yani tüm sayfayı değil, sadece maç verilerini değiştireceksin.
-        </p>
-      </div>
-    `;
+    loadMatches();
   </script>
 </body>
 </html>
