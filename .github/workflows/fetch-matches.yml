@@ -1,0 +1,85 @@
+name: Fetch Football Matches
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repo'yu çek
+        uses: actions/checkout@v4
+
+      - name: Node kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Script dosyasını oluştur
+        run: |
+          mkdir -p scripts
+          cat > scripts/fetchMatches.js <<'EOF'
+          const fs = require("fs");
+
+          async function run() {
+            const apiKey = process.env.FOOTBALL_DATA_API_KEY;
+
+            const competitions = ["PL", "PD", "SA", "BL1", "DED"];
+            const allMatches = [];
+
+            for (const code of competitions) {
+              const url = `https://api.football-data.org/v4/competitions/${code}/matches?status=SCHEDULED`;
+
+              const response = await fetch(url, {
+                headers: {
+                  "X-Auth-Token": apiKey
+                }
+              });
+
+              if (!response.ok) {
+                console.log(`Hata: ${code} verisi alınamadı`);
+                continue;
+              }
+
+              const data = await response.json();
+
+              const simplified = (data.matches || []).slice(0, 10).map(match => ({
+                league: data.competition?.name || code,
+                utcDate: match.utcDate,
+                homeTeam: match.homeTeam?.name || "Bilinmiyor",
+                awayTeam: match.awayTeam?.name || "Bilinmiyor"
+              }));
+
+              allMatches.push(...simplified);
+            }
+
+            fs.mkdirSync("data", { recursive: true });
+            fs.writeFileSync("data/matches.json", JSON.stringify(allMatches, null, 2), "utf8");
+
+            console.log("matches.json güncellendi");
+          }
+
+          run().catch(err => {
+            console.error(err);
+            process.exit(1);
+          });
+          EOF
+
+      - name: Maçları çek
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: node scripts/fetchMatches.js
+
+      - name: Değişiklikleri kaydet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/matches.json
+          git diff --cached --quiet || git commit -m "otomatik mac verisi guncellendi"
+          git push
