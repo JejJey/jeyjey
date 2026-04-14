@@ -168,6 +168,35 @@
       font-weight: bold;
     }
 
+    .suggestion-box {
+      margin-top: 16px;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .suggestion-title {
+      font-size: 13px;
+      color: #166534;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .suggestion-market {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #14532d;
+    }
+
+    .suggestion-reason {
+      font-size: 14px;
+      color: #166534;
+      line-height: 1.6;
+    }
+
     .footer-box {
       margin-top: 28px;
       color: #475569;
@@ -244,10 +273,10 @@
       app.innerHTML = `
         <div class="hero">
           <div class="brand">JeyJey</div>
-          <h1>Otomatik Maç Paneli</h1>
+          <h1>Düşük Risk Analiz Paneli</h1>
           <p>
-            JeyJey artık maç verilerini otomatik çekiyor. Bu sürümde maçları daha düzenli görebilir,
-            lig bazında filtreleyebilir ve yaklaşan karşılaşmaları daha temiz bir panelde inceleyebilirsin.
+            JeyJey artık otomatik maç verisiyle birlikte ilk öneri motorunu da çalıştırıyor.
+            Bu sürümde lig filtresi, takım sıra bilgisi ve basit güvenli market önerisi gösteriliyor.
           </p>
         </div>
 
@@ -277,7 +306,7 @@
 
         <h2 class="section-title">Yaklaşan Maçlar</h2>
         <div class="section-subtitle">
-          Aşağıdaki liste otomatik olarak güncellenen maç verilerinden oluşur.
+          Aşağıdaki liste canlı maç verisi ve ilk karar motoru çıktısını gösterir.
         </div>
 
         ${
@@ -292,13 +321,27 @@
 
                     <div class="match-meta">
                       <div class="meta-box">
-                        <div class="meta-label">Ev Sahibi</div>
-                        <div class="meta-value">${item.homeTeam}</div>
+                        <div class="meta-label">Ev Sahibi Sırası</div>
+                        <div class="meta-value">${item.homePosition ?? "-"}</div>
                       </div>
                       <div class="meta-box">
-                        <div class="meta-label">Deplasman</div>
-                        <div class="meta-value">${item.awayTeam}</div>
+                        <div class="meta-label">Deplasman Sırası</div>
+                        <div class="meta-value">${item.awayPosition ?? "-"}</div>
                       </div>
+                      <div class="meta-box">
+                        <div class="meta-label">Ev Sahibi Form</div>
+                        <div class="meta-value">${item.homeForm || "-"}</div>
+                      </div>
+                      <div class="meta-box">
+                        <div class="meta-label">Deplasman Form</div>
+                        <div class="meta-value">${item.awayForm || "-"}</div>
+                      </div>
+                    </div>
+
+                    <div class="suggestion-box">
+                      <div class="suggestion-title">İlk Öneri</div>
+                      <div class="suggestion-market">${item.suggestion || "-"}</div>
+                      <div class="suggestion-reason">${item.suggestionReason || "Henüz öneri yok."}</div>
                     </div>
                   </div>
                 `).join("")}
@@ -306,7 +349,7 @@
         }
 
         <div class="footer-box">
-          Bu panel artık canlı maç listesini gösteriyor. Sıradaki aşamada oran ve düşük risk analiz katmanını ekleyeceğiz.
+          Bu sürümde öneriler basit kurallarla üretiliyor. Sıradaki aşamada oran ve daha güçlü analiz katmanı ekleyeceğiz.
         </div>
       `;
 
