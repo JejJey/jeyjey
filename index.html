@@ -12,12 +12,12 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #eef3f9;
       color: #0f172a;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 24px;
     }
@@ -28,7 +28,7 @@
       padding: 36px;
       border-radius: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
     }
 
     .brand {
@@ -42,25 +42,25 @@
 
     .hero h1 {
       margin: 0 0 12px 0;
-      font-size: 42px;
+      font-size: 40px;
     }
 
     .hero p {
       margin: 0;
-      font-size: 18px;
+      font-size: 17px;
+      line-height: 1.7;
       color: #dbeafe;
-      max-width: 760px;
-      line-height: 1.6;
+      max-width: 780px;
     }
 
-    .stats {
+    .top-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 16px;
-      margin: 24px 0;
+      margin-bottom: 24px;
     }
 
-    .stat-box {
+    .stat-box, .filter-box, .footer-box, .loading-box, .empty-box {
       background: white;
       border-radius: 20px;
       padding: 20px;
@@ -88,12 +88,38 @@
       margin-bottom: 18px;
     }
 
+    .filter-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .filter-box label {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .filter-box select {
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 15px;
+      background: #f8fafc;
+    }
+
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
     .match-card {
       background: white;
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 18px;
+      border-radius: 22px;
+      padding: 22px;
       box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      border: 1px solid #e2e8f0;
     }
 
     .league-tag {
@@ -107,21 +133,39 @@
     }
 
     .match-title {
-      font-size: 30px;
+      font-size: 24px;
       margin: 0 0 14px 0;
+      line-height: 1.4;
     }
 
     .match-time {
-      font-size: 16px;
+      font-size: 15px;
       color: #475569;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
-    .empty-box, .loading-box, .footer-box {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    .match-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 18px;
+      font-weight: bold;
     }
 
     .footer-box {
@@ -129,25 +173,23 @@
       color: #475569;
     }
 
-    @media (max-width: 900px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
+    .empty-box {
+      text-align: center;
+      color: #475569;
+    }
+
+    @media (max-width: 1000px) {
+      .top-grid,
+      .matches-grid {
+        grid-template-columns: 1fr;
       }
 
       .hero h1 {
         font-size: 32px;
       }
-
-      .match-title {
-        font-size: 24px;
-      }
     }
 
     @media (max-width: 600px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
       .container {
         padding: 16px;
       }
@@ -163,6 +205,10 @@
       .hero p {
         font-size: 16px;
       }
+
+      .match-meta {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -172,6 +218,8 @@
   </div>
 
   <script>
+    let allMatches = [];
+
     function formatDate(utcDate) {
       const date = new Date(utcDate);
       return date.toLocaleString("tr-TR", {
@@ -180,59 +228,104 @@
       });
     }
 
+    function getUniqueLeagues(matches) {
+      return [...new Set(matches.map(match => match.league))].sort();
+    }
+
+    function renderPage(matches, selectedLeague = "Tümü") {
+      const app = document.getElementById("app");
+      const leagues = getUniqueLeagues(allMatches);
+
+      const filteredMatches =
+        selectedLeague === "Tümü"
+          ? matches
+          : matches.filter(match => match.league === selectedLeague);
+
+      app.innerHTML = `
+        <div class="hero">
+          <div class="brand">JeyJey</div>
+          <h1>Otomatik Maç Paneli</h1>
+          <p>
+            JeyJey artık maç verilerini otomatik çekiyor. Bu sürümde maçları daha düzenli görebilir,
+            lig bazında filtreleyebilir ve yaklaşan karşılaşmaları daha temiz bir panelde inceleyebilirsin.
+          </p>
+        </div>
+
+        <div class="top-grid">
+          <div class="stat-box">
+            <div class="stat-label">Toplam Maç</div>
+            <div class="stat-value">${allMatches.length}</div>
+          </div>
+
+          <div class="stat-box">
+            <div class="stat-label">Gösterilen Maç</div>
+            <div class="stat-value">${filteredMatches.length}</div>
+          </div>
+
+          <div class="filter-box">
+            <label for="leagueFilter">Lig Filtresi</label>
+            <select id="leagueFilter">
+              <option value="Tümü" ${selectedLeague === "Tümü" ? "selected" : ""}>Tümü</option>
+              ${leagues.map(league => `
+                <option value="${league}" ${selectedLeague === league ? "selected" : ""}>
+                  ${league}
+                </option>
+              `).join("")}
+            </select>
+          </div>
+        </div>
+
+        <h2 class="section-title">Yaklaşan Maçlar</h2>
+        <div class="section-subtitle">
+          Aşağıdaki liste otomatik olarak güncellenen maç verilerinden oluşur.
+        </div>
+
+        ${
+          filteredMatches.length === 0
+            ? `<div class="empty-box">Bu filtrede gösterilecek maç bulunamadı.</div>`
+            : `<div class="matches-grid">
+                ${filteredMatches.map(item => `
+                  <div class="match-card">
+                    <div class="league-tag">${item.league}</div>
+                    <h2 class="match-title">${item.homeTeam} vs ${item.awayTeam}</h2>
+                    <div class="match-time">Maç zamanı: ${formatDate(item.utcDate)}</div>
+
+                    <div class="match-meta">
+                      <div class="meta-box">
+                        <div class="meta-label">Ev Sahibi</div>
+                        <div class="meta-value">${item.homeTeam}</div>
+                      </div>
+                      <div class="meta-box">
+                        <div class="meta-label">Deplasman</div>
+                        <div class="meta-value">${item.awayTeam}</div>
+                      </div>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>`
+        }
+
+        <div class="footer-box">
+          Bu panel artık canlı maç listesini gösteriyor. Sıradaki aşamada oran ve düşük risk analiz katmanını ekleyeceğiz.
+        </div>
+      `;
+
+      const leagueFilter = document.getElementById("leagueFilter");
+      if (leagueFilter) {
+        leagueFilter.addEventListener("change", (e) => {
+          renderPage(allMatches, e.target.value);
+        });
+      }
+    }
+
     async function loadMatches() {
       const app = document.getElementById("app");
 
       try {
         const response = await fetch("./data/matches.json");
         const matches = await response.json();
-
-        app.innerHTML = `
-          <div class="hero">
-            <div class="brand">JeyJey</div>
-            <h1>Otomatik Maç Listesi</h1>
-            <p>
-              JeyJey artık maç verilerini otomatik çekiyor. Bu aşamada sadece maç listesi gösteriliyor.
-              Bir sonraki adımda oran, risk skoru ve analiz katmanını ekleyeceğiz.
-            </p>
-          </div>
-
-          <div class="stats">
-            <div class="stat-box">
-              <div class="stat-label">Toplam Maç</div>
-              <div class="stat-value">${matches.length}</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Veri Kaynağı</div>
-              <div class="stat-value">API</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Durum</div>
-              <div class="stat-value">Canlı Veri</div>
-            </div>
-          </div>
-
-          <h2 class="section-title">Yaklaşan Maçlar</h2>
-          <div class="section-subtitle">
-            Bu liste otomatik olarak güncellenen maç verilerinden oluşturuluyor.
-          </div>
-
-          ${
-            matches.length === 0
-              ? `<div class="empty-box">Şu an gösterilecek maç bulunamadı.</div>`
-              : matches.map(item => `
-                <div class="match-card">
-                  <div class="league-tag">${item.league}</div>
-                  <h2 class="match-title">${item.homeTeam} vs ${item.awayTeam}</h2>
-                  <div class="match-time">Maç zamanı: ${formatDate(item.utcDate)}</div>
-                </div>
-              `).join("")
-          }
-
-          <div class="footer-box">
-            JeyJey'in bu sürümünde veriler otomatik geliyor. Sıradaki adım, bu maçların üzerine oran ve düşük risk analizi eklemek.
-          </div>
-        `;
+        allMatches = matches;
+        renderPage(allMatches);
       } catch (error) {
         app.innerHTML = `
           <div class="empty-box">
