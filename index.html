@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JeyJey</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -187,9 +185,32 @@
     .suggestion-market {
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       color: #14532d;
     }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge-confidence-high { background: #dcfce7; color: #166534; }
+    .badge-confidence-medium { background: #fef3c7; color: #92400e; }
+    .badge-confidence-low { background: #fee2e2; color: #991b1b; }
+
+    .badge-risk-low { background: #dbeafe; color: #1d4ed8; }
+    .badge-risk-medium { background: #fef3c7; color: #92400e; }
+    .badge-risk-high { background: #fee2e2; color: #991b1b; }
 
     .suggestion-reason {
       font-size: 14px;
@@ -208,8 +229,7 @@
     }
 
     @media (max-width: 1000px) {
-      .top-grid,
-      .matches-grid {
+      .top-grid, .matches-grid {
         grid-template-columns: 1fr;
       }
 
@@ -219,25 +239,11 @@
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 16px;
-      }
-
-      .hero {
-        padding: 24px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .match-meta {
-        grid-template-columns: 1fr;
-      }
+      .container { padding: 16px; }
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .match-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -261,6 +267,18 @@
       return [...new Set(matches.map(match => match.league))].sort();
     }
 
+    function confidenceClass(value) {
+      if (value === "Yüksek") return "badge-confidence-high";
+      if (value === "Orta") return "badge-confidence-medium";
+      return "badge-confidence-low";
+    }
+
+    function riskClass(value) {
+      if (value === "Düşük") return "badge-risk-low";
+      if (value === "Orta") return "badge-risk-medium";
+      return "badge-risk-high";
+    }
+
     function renderPage(matches, selectedLeague = "Tümü") {
       const app = document.getElementById("app");
       const leagues = getUniqueLeagues(allMatches);
@@ -276,7 +294,7 @@
           <h1>Düşük Risk Analiz Paneli</h1>
           <p>
             JeyJey artık otomatik maç verisiyle birlikte ilk öneri motorunu da çalıştırıyor.
-            Bu sürümde lig filtresi, takım sıra bilgisi ve basit güvenli market önerisi gösteriliyor.
+            Bu sürümde lig filtresi, takım sıra bilgisi, güven seviyesi ve risk etiketi gösteriliyor.
           </p>
         </div>
 
@@ -306,7 +324,7 @@
 
         <h2 class="section-title">Yaklaşan Maçlar</h2>
         <div class="section-subtitle">
-          Aşağıdaki liste canlı maç verisi ve ilk karar motoru çıktısını gösterir.
+          Aşağıdaki liste canlı maç verisi ve karar motoru çıktısını gösterir.
         </div>
 
         ${
@@ -341,6 +359,12 @@
                     <div class="suggestion-box">
                       <div class="suggestion-title">İlk Öneri</div>
                       <div class="suggestion-market">${item.suggestion || "-"}</div>
+
+                      <div class="badge-row">
+                        <span class="badge ${confidenceClass(item.confidence)}">Güven: ${item.confidence || "-"}</span>
+                        <span class="badge ${riskClass(item.riskLevel)}">Risk: ${item.riskLevel || "-"}</span>
+                      </div>
+
                       <div class="suggestion-reason">${item.suggestionReason || "Henüz öneri yok."}</div>
                     </div>
                   </div>
@@ -365,7 +389,7 @@
       const app = document.getElementById("app");
 
       try {
-        const response = await fetch("./data/matches.json");
+        const response = await fetch(`./data/matches.json?v=${Date.now()}`);
         const matches = await response.json();
         allMatches = matches;
         renderPage(allMatches);
