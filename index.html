@@ -7,51 +7,99 @@
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --bg: #071018;
+      --panel: #0d1722;
+      --panel-2: #101c29;
+      --panel-3: #132233;
+      --text: #eef6ff;
+      --muted: #8da3bb;
+      --line: rgba(255,255,255,0.07);
+      --green: #8BFF72;
+      --green-soft: rgba(139,255,114,0.12);
+      --yellow: #FFD84D;
+      --yellow-soft: rgba(255,216,77,0.12);
+      --blue: #6FC7FF;
+      --blue-soft: rgba(111,199,255,0.12);
+      --red: #FF7D7D;
+      --red-soft: rgba(255,125,125,0.12);
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0b1220;
-      color: #e5eefc;
+      background:
+        radial-gradient(circle at top left, rgba(139,255,114,0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(255,216,77,0.08), transparent 22%),
+        linear-gradient(180deg, #071018 0%, #09131d 100%);
+      color: var(--text);
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 24px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #111b31, #16223d);
-      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(139,255,114,0.08), transparent 28%),
+        linear-gradient(225deg, rgba(255,216,77,0.08), transparent 22%),
+        linear-gradient(180deg, #0d1722 0%, #0b1520 100%);
+      border: 1px solid var(--line);
       border-radius: 28px;
-      padding: 32px;
+      padding: 30px;
       margin-bottom: 24px;
       box-shadow: 0 16px 40px rgba(0,0,0,0.28);
     }
 
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(139,255,114,0.12), transparent 60%);
+      pointer-events: none;
+    }
+
     .brand {
-      display: inline-block;
-      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: #c9d9ff;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: #dbeafe;
       font-size: 13px;
       margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(139,255,114,0.7);
     }
 
     .hero h1 {
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
       font-size: 42px;
       color: white;
+      letter-spacing: -0.02em;
     }
 
     .hero p {
       margin: 0;
+      max-width: 850px;
+      color: #aebfd3;
       font-size: 17px;
-      line-height: 1.7;
-      color: #b7c7e6;
-      max-width: 800px;
+      line-height: 1.75;
     }
 
     .top-grid {
@@ -62,19 +110,32 @@
     }
 
     .panel-box, .filter-box, .footer-box, .loading-box, .empty-box, .match-card, .featured-card {
-      background: #11192d;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 22px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.20);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel) 0%, #0b1520 100%);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
     }
 
     .panel-box, .filter-box, .footer-box, .loading-box, .empty-box {
       padding: 20px;
     }
 
+    .panel-box {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(139,255,114,0.05), transparent 45%);
+      pointer-events: none;
+    }
+
     .stat-label {
       font-size: 13px;
-      color: #8ea3c7;
+      color: var(--muted);
       margin-bottom: 8px;
     }
 
@@ -84,37 +145,35 @@
       color: white;
     }
 
-    .filter-box {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
     .filter-box label {
+      display: block;
       font-size: 13px;
-      color: #8ea3c7;
+      color: var(--muted);
       margin-bottom: 8px;
     }
 
     .filter-box select {
-      border: 1px solid rgba(255,255,255,0.10);
+      width: 100%;
       border-radius: 14px;
       padding: 12px;
       font-size: 15px;
-      background: #0d1528;
-      color: #e5eefc;
+      color: white;
+      background: #0a1320;
+      border: 1px solid var(--line);
+      outline: none;
     }
 
     .section-title {
       font-size: 28px;
       margin: 0 0 10px 0;
       color: white;
+      letter-spacing: -0.02em;
     }
 
     .section-subtitle {
-      color: #8ea3c7;
+      color: var(--muted);
       margin-bottom: 18px;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .featured-grid {
@@ -125,16 +184,51 @@
     }
 
     .featured-card {
-      padding: 20px;
-      background: linear-gradient(180deg, #121d35, #10182c);
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(139,255,114,0.05), transparent 38%),
+        linear-gradient(180deg, #101b29 0%, #0c1622 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -30px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(255,216,77,0.14), transparent 65%);
+      pointer-events: none;
+    }
+
+    .featured-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .featured-title {
       font-size: 12px;
-      color: #8ea3c7;
       text-transform: uppercase;
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .signal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #1a1a1a;
+      background: var(--yellow);
+      box-shadow: 0 0 18px rgba(255,216,77,0.18);
     }
 
     .featured-match {
@@ -142,20 +236,25 @@
       font-weight: bold;
       line-height: 1.4;
       color: white;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .featured-market {
-      font-size: 26px;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: var(--green-soft);
+      border: 1px solid rgba(139,255,114,0.22);
+      color: var(--green);
+      font-size: 24px;
       font-weight: bold;
-      color: #86efac;
       margin-bottom: 12px;
     }
 
     .featured-reason {
       font-size: 14px;
-      color: #b7c7e6;
-      line-height: 1.6;
+      line-height: 1.65;
+      color: #cad7e7;
     }
 
     .matches-grid {
@@ -166,29 +265,50 @@
 
     .match-card {
       padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(111,199,255,0.04), transparent 30%),
+        linear-gradient(180deg, var(--panel-2) 0%, #0b1520 100%);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
     }
 
     .league-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.07);
-      color: #c9d9ff;
-      padding: 7px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
       border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      color: #d4e2f4;
       font-size: 12px;
-      margin-bottom: 14px;
-      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .league-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 10px rgba(111,199,255,0.55);
     }
 
     .match-title {
       font-size: 24px;
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
       line-height: 1.4;
       color: white;
+      letter-spacing: -0.02em;
     }
 
     .match-time {
       font-size: 14px;
-      color: #8ea3c7;
+      color: var(--muted);
       margin-bottom: 16px;
     }
 
@@ -200,15 +320,15 @@
     }
 
     .meta-box {
-      background: #0d1528;
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 14px;
+      background: linear-gradient(180deg, var(--panel-3) 0%, #0d1723 100%);
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .meta-label {
       font-size: 12px;
-      color: #8ea3c7;
+      color: var(--muted);
       margin-bottom: 6px;
     }
 
@@ -220,26 +340,30 @@
 
     .suggestion-box {
       margin-top: 8px;
-      background: rgba(16, 185, 129, 0.10);
-      border: 1px solid rgba(52, 211, 153, 0.25);
-      border-radius: 18px;
       padding: 16px;
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(139,255,114,0.08), transparent 60%),
+        #0d1c14;
+      border: 1px solid rgba(139,255,114,0.22);
+      box-shadow: inset 0 0 0 1px rgba(139,255,114,0.03);
     }
 
     .suggestion-title {
       font-size: 12px;
-      color: #86efac;
+      color: #bdf5ae;
       margin-bottom: 8px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
 
     .suggestion-market {
       font-size: 24px;
       font-weight: bold;
+      color: var(--green);
       margin-bottom: 12px;
-      color: #bbf7d0;
+      letter-spacing: -0.02em;
     }
 
     .badge-row {
@@ -250,7 +374,9 @@
     }
 
     .badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
       font-size: 12px;
@@ -259,55 +385,55 @@
     }
 
     .badge-confidence-high {
-      background: rgba(34,197,94,0.12);
-      color: #86efac;
-      border-color: rgba(34,197,94,0.22);
+      background: var(--green-soft);
+      color: var(--green);
+      border-color: rgba(139,255,114,0.20);
     }
 
     .badge-confidence-medium {
-      background: rgba(245,158,11,0.12);
-      color: #fcd34d;
-      border-color: rgba(245,158,11,0.22);
+      background: var(--yellow-soft);
+      color: var(--yellow);
+      border-color: rgba(255,216,77,0.20);
     }
 
     .badge-confidence-low {
-      background: rgba(239,68,68,0.12);
-      color: #fca5a5;
-      border-color: rgba(239,68,68,0.22);
+      background: var(--red-soft);
+      color: #ffb0b0;
+      border-color: rgba(255,125,125,0.20);
     }
 
     .badge-risk-low {
-      background: rgba(59,130,246,0.12);
-      color: #93c5fd;
-      border-color: rgba(59,130,246,0.22);
+      background: rgba(111,199,255,0.12);
+      color: var(--blue);
+      border-color: rgba(111,199,255,0.20);
     }
 
     .badge-risk-medium {
-      background: rgba(245,158,11,0.12);
-      color: #fcd34d;
-      border-color: rgba(245,158,11,0.22);
+      background: var(--yellow-soft);
+      color: var(--yellow);
+      border-color: rgba(255,216,77,0.20);
     }
 
     .badge-risk-high {
-      background: rgba(239,68,68,0.12);
-      color: #fca5a5;
-      border-color: rgba(239,68,68,0.22);
+      background: var(--red-soft);
+      color: #ffb0b0;
+      border-color: rgba(255,125,125,0.20);
     }
 
     .suggestion-reason {
       font-size: 14px;
-      color: #d7e5ff;
-      line-height: 1.6;
+      color: #d9e7f8;
+      line-height: 1.65;
     }
 
     .footer-box {
       margin-top: 28px;
-      color: #8ea3c7;
+      color: var(--muted);
       line-height: 1.7;
     }
 
     .empty-box, .loading-box {
-      color: #8ea3c7;
+      color: var(--muted);
       text-align: center;
     }
 
@@ -324,29 +450,13 @@
     }
 
     @media (max-width: 700px) {
-      .container {
-        padding: 16px;
-      }
-
-      .hero {
-        padding: 24px;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .match-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .featured-match {
-        font-size: 20px;
-      }
+      .container { padding: 16px; }
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .match-meta { grid-template-columns: 1fr; }
+      .featured-match { font-size: 20px; }
+      .card-top { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -408,11 +518,11 @@
 
       app.innerHTML = `
         <div class="hero">
-          <div class="brand">JeyJey</div>
+          <div class="brand"><span class="brand-dot"></span> JeyJey</div>
           <h1>Düşük Risk Analiz Paneli</h1>
           <p>
             JeyJey, yaklaşan maçları otomatik toplar ve ilk karar motoruyla daha kontrollü market önerileri üretir.
-            Bu sürümde öne çıkan maçlar, güven ve risk rozetleri ve daha modern bir görünüm yer alır.
+            Bu sürüm, daha canlı vurgu renkleri ve daha güçlü dashboard hissi ile yeniden tasarlandı.
           </p>
         </div>
 
@@ -442,13 +552,16 @@
 
         <h2 class="section-title">Öne Çıkan Maçlar</h2>
         <div class="section-subtitle">
-          Karar motorunun mevcut kurallarına göre en dikkat çeken eşleşmeler.
+          Mevcut kurallara göre en dikkat çeken düşük risk adayları.
         </div>
 
         <div class="featured-grid">
           ${featured.map(item => `
             <div class="featured-card">
-              <div class="featured-title">${item.league}</div>
+              <div class="featured-top">
+                <div class="featured-title">${item.league}</div>
+                <div class="signal-pill">ÖNE ÇIKAN</div>
+              </div>
               <div class="featured-match">${item.homeTeam} vs ${item.awayTeam}</div>
               <div class="featured-market">${item.suggestion || "-"}</div>
               <div class="badge-row">
@@ -462,7 +575,7 @@
 
         <h2 class="section-title">Tüm Maçlar</h2>
         <div class="section-subtitle">
-          Aşağıdaki kartlar canlı maç verisi ve ilk öneri motoru çıktısını gösterir.
+          Canlı maç verisi ve karar motoru çıktısı.
         </div>
 
         ${
@@ -471,7 +584,10 @@
             : `<div class="matches-grid">
                 ${filteredMatches.map(item => `
                   <div class="match-card">
-                    <div class="league-tag">${item.league}</div>
+                    <div class="card-top">
+                      <div class="league-tag"><span class="league-dot"></span>${item.league}</div>
+                    </div>
+
                     <h2 class="match-title">${item.homeTeam} vs ${item.awayTeam}</h2>
                     <div class="match-time">Maç zamanı: ${formatDate(item.utcDate)}</div>
 
@@ -511,7 +627,7 @@
         }
 
         <div class="footer-box">
-          Bu sürümde öneriler basit kurallarla üretiliyor. Bir sonraki büyük adım oran katmanı ve daha güçlü analiz mantığı olacak.
+          Bu sürümde öneriler hâlâ kural tabanlı. Sonraki büyük adım oran katmanı ve daha gelişmiş karar mantığı olacak.
         </div>
       `;
 
@@ -532,11 +648,7 @@
         allMatches = matches;
         renderPage(allMatches);
       } catch (error) {
-        app.innerHTML = `
-          <div class="empty-box">
-            Maç verileri yüklenemedi. Biraz sonra tekrar dene.
-          </div>
-        `;
+        app.innerHTML = `<div class="empty-box">Maç verileri yüklenemedi. Biraz sonra tekrar dene.</div>`;
         console.error(error);
       }
     }
