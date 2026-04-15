@@ -10,80 +10,78 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #eef3f9;
-      color: #0f172a;
+      background: #0b1220;
+      color: #e5eefc;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 24px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      padding: 36px;
-      border-radius: 24px;
+      background: linear-gradient(135deg, #111b31, #16223d);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 28px;
+      padding: 32px;
       margin-bottom: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
     }
 
     .brand {
       display: inline-block;
       padding: 8px 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: #c9d9ff;
       font-size: 13px;
       margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .hero h1 {
       margin: 0 0 12px 0;
-      font-size: 40px;
+      font-size: 42px;
+      color: white;
     }
 
     .hero p {
       margin: 0;
       font-size: 17px;
       line-height: 1.7;
-      color: #dbeafe;
-      max-width: 780px;
+      color: #b7c7e6;
+      max-width: 800px;
     }
 
     .top-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
-    .stat-box, .filter-box, .footer-box, .loading-box, .empty-box {
-      background: white;
-      border-radius: 20px;
+    .panel-box, .filter-box, .footer-box, .loading-box, .empty-box, .match-card, .featured-card {
+      background: #11192d;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.20);
+    }
+
+    .panel-box, .filter-box, .footer-box, .loading-box, .empty-box {
       padding: 20px;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     }
 
     .stat-label {
-      font-size: 14px;
-      color: #64748b;
+      font-size: 13px;
+      color: #8ea3c7;
       margin-bottom: 8px;
     }
 
     .stat-value {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: bold;
-    }
-
-    .section-title {
-      font-size: 28px;
-      margin: 28px 0 10px 0;
-    }
-
-    .section-subtitle {
-      color: #475569;
-      margin-bottom: 18px;
+      color: white;
     }
 
     .filter-box {
@@ -93,17 +91,71 @@
     }
 
     .filter-box label {
-      font-size: 14px;
-      color: #64748b;
+      font-size: 13px;
+      color: #8ea3c7;
       margin-bottom: 8px;
     }
 
     .filter-box select {
-      border: 1px solid #cbd5e1;
+      border: 1px solid rgba(255,255,255,0.10);
       border-radius: 14px;
       padding: 12px;
       font-size: 15px;
-      background: #f8fafc;
+      background: #0d1528;
+      color: #e5eefc;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 0 0 10px 0;
+      color: white;
+    }
+
+    .section-subtitle {
+      color: #8ea3c7;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .featured-card {
+      padding: 20px;
+      background: linear-gradient(180deg, #121d35, #10182c);
+    }
+
+    .featured-title {
+      font-size: 12px;
+      color: #8ea3c7;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .featured-match {
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1.4;
+      color: white;
+      margin-bottom: 14px;
+    }
+
+    .featured-market {
+      font-size: 26px;
+      font-weight: bold;
+      color: #86efac;
+      margin-bottom: 12px;
+    }
+
+    .featured-reason {
+      font-size: 14px;
+      color: #b7c7e6;
+      line-height: 1.6;
     }
 
     .matches-grid {
@@ -113,80 +165,81 @@
     }
 
     .match-card {
-      background: white;
-      border-radius: 22px;
       padding: 22px;
-      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
-      border: 1px solid #e2e8f0;
     }
 
     .league-tag {
       display: inline-block;
-      background: #e2e8f0;
-      color: #334155;
+      background: rgba(255,255,255,0.07);
+      color: #c9d9ff;
       padding: 7px 12px;
       border-radius: 999px;
       font-size: 12px;
       margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
     .match-title {
       font-size: 24px;
-      margin: 0 0 14px 0;
+      margin: 0 0 12px 0;
       line-height: 1.4;
+      color: white;
     }
 
     .match-time {
-      font-size: 15px;
-      color: #475569;
-      margin-bottom: 14px;
+      font-size: 14px;
+      color: #8ea3c7;
+      margin-bottom: 16px;
     }
 
     .match-meta {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 14px;
+      margin-bottom: 16px;
     }
 
     .meta-box {
-      background: #f8fafc;
+      background: #0d1528;
+      border: 1px solid rgba(255,255,255,0.05);
       border-radius: 16px;
       padding: 14px;
     }
 
     .meta-label {
       font-size: 12px;
-      color: #64748b;
+      color: #8ea3c7;
       margin-bottom: 6px;
     }
 
     .meta-value {
       font-size: 18px;
       font-weight: bold;
+      color: white;
     }
 
     .suggestion-box {
-      margin-top: 16px;
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
+      margin-top: 8px;
+      background: rgba(16, 185, 129, 0.10);
+      border: 1px solid rgba(52, 211, 153, 0.25);
       border-radius: 18px;
       padding: 16px;
     }
 
     .suggestion-title {
-      font-size: 13px;
-      color: #166534;
+      font-size: 12px;
+      color: #86efac;
       margin-bottom: 8px;
       font-weight: bold;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .suggestion-market {
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 12px;
-      color: #14532d;
+      color: #bbf7d0;
     }
 
     .badge-row {
@@ -202,48 +255,98 @@
       border-radius: 999px;
       font-size: 12px;
       font-weight: bold;
+      border: 1px solid transparent;
     }
 
-    .badge-confidence-high { background: #dcfce7; color: #166534; }
-    .badge-confidence-medium { background: #fef3c7; color: #92400e; }
-    .badge-confidence-low { background: #fee2e2; color: #991b1b; }
+    .badge-confidence-high {
+      background: rgba(34,197,94,0.12);
+      color: #86efac;
+      border-color: rgba(34,197,94,0.22);
+    }
 
-    .badge-risk-low { background: #dbeafe; color: #1d4ed8; }
-    .badge-risk-medium { background: #fef3c7; color: #92400e; }
-    .badge-risk-high { background: #fee2e2; color: #991b1b; }
+    .badge-confidence-medium {
+      background: rgba(245,158,11,0.12);
+      color: #fcd34d;
+      border-color: rgba(245,158,11,0.22);
+    }
+
+    .badge-confidence-low {
+      background: rgba(239,68,68,0.12);
+      color: #fca5a5;
+      border-color: rgba(239,68,68,0.22);
+    }
+
+    .badge-risk-low {
+      background: rgba(59,130,246,0.12);
+      color: #93c5fd;
+      border-color: rgba(59,130,246,0.22);
+    }
+
+    .badge-risk-medium {
+      background: rgba(245,158,11,0.12);
+      color: #fcd34d;
+      border-color: rgba(245,158,11,0.22);
+    }
+
+    .badge-risk-high {
+      background: rgba(239,68,68,0.12);
+      color: #fca5a5;
+      border-color: rgba(239,68,68,0.22);
+    }
 
     .suggestion-reason {
       font-size: 14px;
-      color: #166534;
+      color: #d7e5ff;
       line-height: 1.6;
     }
 
     .footer-box {
       margin-top: 28px;
-      color: #475569;
+      color: #8ea3c7;
+      line-height: 1.7;
     }
 
-    .empty-box {
+    .empty-box, .loading-box {
+      color: #8ea3c7;
       text-align: center;
-      color: #475569;
     }
 
-    @media (max-width: 1000px) {
-      .top-grid, .matches-grid {
+    @media (max-width: 1100px) {
+      .featured-grid,
+      .matches-grid,
+      .top-grid {
         grid-template-columns: 1fr;
       }
 
       .hero h1 {
-        font-size: 32px;
+        font-size: 34px;
       }
     }
 
-    @media (max-width: 600px) {
-      .container { padding: 16px; }
-      .hero { padding: 24px; }
-      .hero h1 { font-size: 28px; }
-      .hero p { font-size: 16px; }
-      .match-meta { grid-template-columns: 1fr; }
+    @media (max-width: 700px) {
+      .container {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .match-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-match {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
@@ -279,6 +382,19 @@
       return "badge-risk-high";
     }
 
+    function featuredMatches(matches) {
+      const scored = [...matches].sort((a, b) => {
+        const scoreA =
+          (a.confidence === "Yüksek" ? 3 : a.confidence === "Orta" ? 2 : 1) +
+          (a.riskLevel === "Düşük" ? 3 : a.riskLevel === "Orta" ? 2 : 1);
+        const scoreB =
+          (b.confidence === "Yüksek" ? 3 : b.confidence === "Orta" ? 2 : 1) +
+          (b.riskLevel === "Düşük" ? 3 : b.riskLevel === "Orta" ? 2 : 1);
+        return scoreB - scoreA;
+      });
+      return scored.slice(0, 3);
+    }
+
     function renderPage(matches, selectedLeague = "Tümü") {
       const app = document.getElementById("app");
       const leagues = getUniqueLeagues(allMatches);
@@ -288,23 +404,25 @@
           ? matches
           : matches.filter(match => match.league === selectedLeague);
 
+      const featured = featuredMatches(filteredMatches);
+
       app.innerHTML = `
         <div class="hero">
           <div class="brand">JeyJey</div>
           <h1>Düşük Risk Analiz Paneli</h1>
           <p>
-            JeyJey artık otomatik maç verisiyle birlikte ilk öneri motorunu da çalıştırıyor.
-            Bu sürümde lig filtresi, takım sıra bilgisi, güven seviyesi ve risk etiketi gösteriliyor.
+            JeyJey, yaklaşan maçları otomatik toplar ve ilk karar motoruyla daha kontrollü market önerileri üretir.
+            Bu sürümde öne çıkan maçlar, güven ve risk rozetleri ve daha modern bir görünüm yer alır.
           </p>
         </div>
 
         <div class="top-grid">
-          <div class="stat-box">
+          <div class="panel-box">
             <div class="stat-label">Toplam Maç</div>
             <div class="stat-value">${allMatches.length}</div>
           </div>
 
-          <div class="stat-box">
+          <div class="panel-box">
             <div class="stat-label">Gösterilen Maç</div>
             <div class="stat-value">${filteredMatches.length}</div>
           </div>
@@ -322,9 +440,29 @@
           </div>
         </div>
 
-        <h2 class="section-title">Yaklaşan Maçlar</h2>
+        <h2 class="section-title">Öne Çıkan Maçlar</h2>
         <div class="section-subtitle">
-          Aşağıdaki liste canlı maç verisi ve karar motoru çıktısını gösterir.
+          Karar motorunun mevcut kurallarına göre en dikkat çeken eşleşmeler.
+        </div>
+
+        <div class="featured-grid">
+          ${featured.map(item => `
+            <div class="featured-card">
+              <div class="featured-title">${item.league}</div>
+              <div class="featured-match">${item.homeTeam} vs ${item.awayTeam}</div>
+              <div class="featured-market">${item.suggestion || "-"}</div>
+              <div class="badge-row">
+                <span class="badge ${confidenceClass(item.confidence)}">Güven: ${item.confidence || "-"}</span>
+                <span class="badge ${riskClass(item.riskLevel)}">Risk: ${item.riskLevel || "-"}</span>
+              </div>
+              <div class="featured-reason">${item.suggestionReason || "Henüz öneri yok."}</div>
+            </div>
+          `).join("")}
+        </div>
+
+        <h2 class="section-title">Tüm Maçlar</h2>
+        <div class="section-subtitle">
+          Aşağıdaki kartlar canlı maç verisi ve ilk öneri motoru çıktısını gösterir.
         </div>
 
         ${
@@ -373,7 +511,7 @@
         }
 
         <div class="footer-box">
-          Bu sürümde öneriler basit kurallarla üretiliyor. Sıradaki aşamada oran ve daha güçlü analiz katmanı ekleyeceğiz.
+          Bu sürümde öneriler basit kurallarla üretiliyor. Bir sonraki büyük adım oran katmanı ve daha güçlü analiz mantığı olacak.
         </div>
       `;
 
