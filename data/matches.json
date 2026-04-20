@@ -1,22 +1,6 @@
 [
   {
     "league": "Premier League",
-    "utcDate": "2026-04-20T19:00:00Z",
-    "homeTeam": "Crystal Palace FC",
-    "awayTeam": "West Ham United FC",
-    "homePosition": 13,
-    "awayPosition": 17,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "Temkinli",
-    "confidence": "Düşük",
-    "riskLevel": "Yüksek",
-    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
-  },
-  {
-    "league": "Premier League",
     "utcDate": "2026-04-21T19:00:00Z",
     "homeTeam": "Brighton & Hove Albion FC",
     "awayTeam": "Chelsea FC",
@@ -158,6 +142,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Premier League",
+    "utcDate": "2026-04-27T19:00:00Z",
+    "homeTeam": "Manchester United FC",
+    "awayTeam": "Brentford FC",
+    "homePosition": 3,
+    "awayPosition": 7,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "Temkinli",
+    "confidence": "Düşük",
+    "riskLevel": "Yüksek",
+    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
   },
   {
     "league": "Primera Division",
@@ -321,22 +321,6 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-04-20T18:45:00Z",
-    "homeTeam": "US Lecce",
-    "awayTeam": "ACF Fiorentina",
-    "homePosition": 18,
-    "awayPosition": 15,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "3.5 Alt",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
-  },
-  {
-    "league": "Serie A",
     "utcDate": "2026-04-24T18:45:00Z",
     "homeTeam": "SSC Napoli",
     "awayTeam": "US Cremonese",
@@ -478,6 +462,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Serie A",
+    "utcDate": "2026-04-27T18:45:00Z",
+    "homeTeam": "SS Lazio",
+    "awayTeam": "Udinese Calcio",
+    "homePosition": 9,
+    "awayPosition": 11,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "3.5 Alt",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
   },
   {
     "league": "Bundesliga",
