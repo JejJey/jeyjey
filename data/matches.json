@@ -1,22 +1,6 @@
 [
   {
     "league": "Premier League",
-    "utcDate": "2026-04-24T19:00:00Z",
-    "homeTeam": "Sunderland AFC",
-    "awayTeam": "Nottingham Forest FC",
-    "homePosition": 11,
-    "awayPosition": 16,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "1.5 Üst",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
-  },
-  {
-    "league": "Premier League",
     "utcDate": "2026-04-25T11:30:00Z",
     "homeTeam": "Fulham FC",
     "awayTeam": "Aston Villa FC",
@@ -160,20 +144,20 @@
     "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
-    "league": "Primera Division",
-    "utcDate": "2026-04-24T19:00:00Z",
-    "homeTeam": "Real Betis Balompié",
-    "awayTeam": "Real Madrid CF",
-    "homePosition": 5,
-    "awayPosition": 2,
+    "league": "Premier League",
+    "utcDate": "2026-05-02T14:00:00Z",
+    "homeTeam": "Wolverhampton Wanderers FC",
+    "awayTeam": "Sunderland AFC",
+    "homePosition": 20,
+    "awayPosition": 11,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "3.5 Alt",
+    "suggestion": "1.5 Üst",
     "confidence": "Orta",
     "riskLevel": "Orta",
-    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
     "league": "Primera Division",
@@ -320,20 +304,20 @@
     "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
-    "league": "Serie A",
-    "utcDate": "2026-04-24T18:45:00Z",
-    "homeTeam": "SSC Napoli",
-    "awayTeam": "US Cremonese",
-    "homePosition": 3,
-    "awayPosition": 17,
+    "league": "Primera Division",
+    "utcDate": "2026-05-01T19:00:00Z",
+    "homeTeam": "Girona FC",
+    "awayTeam": "RCD Mallorca",
+    "homePosition": 11,
+    "awayPosition": 15,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "1.5 Üst",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
+    "suggestion": "Temkinli",
+    "confidence": "Düşük",
+    "riskLevel": "Yüksek",
+    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
   },
   {
     "league": "Serie A",
@@ -373,7 +357,7 @@
     "homeTeam": "Hellas Verona FC",
     "awayTeam": "US Lecce",
     "homePosition": 19,
-    "awayPosition": 18,
+    "awayPosition": 17,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
@@ -436,7 +420,7 @@
     "utcDate": "2026-04-26T18:45:00Z",
     "homeTeam": "AC Milan",
     "awayTeam": "Juventus FC",
-    "homePosition": 2,
+    "homePosition": 3,
     "awayPosition": 4,
     "homeForm": "-",
     "awayForm": "-",
@@ -480,20 +464,20 @@
     "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
   },
   {
-    "league": "Bundesliga",
-    "utcDate": "2026-04-24T18:30:00Z",
-    "homeTeam": "RB Leipzig",
-    "awayTeam": "1. FC Union Berlin",
-    "homePosition": 3,
-    "awayPosition": 11,
+    "league": "Serie A",
+    "utcDate": "2026-05-01T18:45:00Z",
+    "homeTeam": "AC Pisa 1909",
+    "awayTeam": "US Lecce",
+    "homePosition": 20,
+    "awayPosition": 17,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "1.5 Üst",
+    "suggestion": "3.5 Alt",
     "confidence": "Orta",
     "riskLevel": "Orta",
-    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
+    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
   },
   {
     "league": "Bundesliga",
@@ -638,6 +622,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Bundesliga",
+    "utcDate": "2026-05-02T13:30:00Z",
+    "homeTeam": "SV Werder Bremen",
+    "awayTeam": "FC Augsburg",
+    "homePosition": 15,
+    "awayPosition": 9,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "1.5 Üst",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
     "league": "Eredivisie",
