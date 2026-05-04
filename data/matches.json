@@ -1,22 +1,6 @@
 [
   {
     "league": "Premier League",
-    "utcDate": "2026-05-04T14:00:00Z",
-    "homeTeam": "Chelsea FC",
-    "awayTeam": "Nottingham Forest FC",
-    "homePosition": 9,
-    "awayPosition": 16,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "1.5 Üst",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
-  },
-  {
-    "league": "Premier League",
     "utcDate": "2026-05-04T19:00:00Z",
     "homeTeam": "Everton FC",
     "awayTeam": "Manchester City FC",
@@ -158,6 +142,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Premier League",
+    "utcDate": "2026-05-10T15:30:00Z",
+    "homeTeam": "West Ham United FC",
+    "awayTeam": "Arsenal FC",
+    "homePosition": 18,
+    "awayPosition": 1,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "1.5 Üst",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
     "league": "Primera Division",
@@ -321,22 +321,6 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-05-04T16:30:00Z",
-    "homeTeam": "US Cremonese",
-    "awayTeam": "SS Lazio",
-    "homePosition": 18,
-    "awayPosition": 10,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "1.5 Üst",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
-  },
-  {
-    "league": "Serie A",
     "utcDate": "2026-05-04T18:45:00Z",
     "homeTeam": "AS Roma",
     "awayTeam": "ACF Fiorentina",
@@ -357,15 +341,15 @@
     "homeTeam": "Torino FC",
     "awayTeam": "US Sassuolo Calcio",
     "homePosition": 13,
-    "awayPosition": 9,
+    "awayPosition": 10,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "Temkinli",
-    "confidence": "Düşük",
-    "riskLevel": "Yüksek",
-    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
+    "suggestion": "3.5 Alt",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
   },
   {
     "league": "Serie A",
@@ -388,7 +372,7 @@
     "utcDate": "2026-05-09T16:00:00Z",
     "homeTeam": "SS Lazio",
     "awayTeam": "FC Internazionale Milano",
-    "homePosition": 10,
+    "homePosition": 8,
     "awayPosition": 1,
     "homeForm": "-",
     "awayForm": "-",
@@ -478,6 +462,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Serie A",
+    "utcDate": "2026-05-10T18:45:00Z",
+    "homeTeam": "AC Milan",
+    "awayTeam": "Atalanta BC",
+    "homePosition": 3,
+    "awayPosition": 7,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "Temkinli",
+    "confidence": "Düşük",
+    "riskLevel": "Yüksek",
+    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
   },
   {
     "league": "Bundesliga",
