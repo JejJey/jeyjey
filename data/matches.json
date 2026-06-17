@@ -1,7 +1,7 @@
 [
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Udinese Calcio",
     "awayTeam": "Como 1907",
     "homePosition": 10,
@@ -17,7 +17,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Bologna FC 1909",
     "awayTeam": "SS Lazio",
     "homePosition": 8,
@@ -33,7 +33,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Genoa CFC",
     "awayTeam": "SSC Napoli",
     "homePosition": 16,
@@ -49,7 +49,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "FC Internazionale Milano",
     "awayTeam": "AC Monza",
     "homePosition": 1,
@@ -65,7 +65,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Atalanta BC",
     "awayTeam": "US Sassuolo Calcio",
     "homePosition": 7,
@@ -81,7 +81,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Torino FC",
     "awayTeam": "AC Milan",
     "homePosition": 12,
@@ -97,7 +97,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Frosinone Calcio",
     "awayTeam": "Juventus FC",
     "homePosition": null,
@@ -113,7 +113,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Parma Calcio 1913",
     "awayTeam": "Cagliari Calcio",
     "homePosition": 13,
@@ -129,7 +129,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "Venezia FC",
     "awayTeam": "US Lecce",
     "homePosition": null,
@@ -145,7 +145,7 @@
   },
   {
     "league": "Serie A",
-    "utcDate": "2026-08-23T18:30:00Z",
+    "utcDate": "2026-08-23T16:30:00Z",
     "homeTeam": "AS Roma",
     "awayTeam": "ACF Fiorentina",
     "homePosition": 3,
