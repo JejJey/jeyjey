@@ -709,7 +709,7 @@
     "homeTeam": "ADO Den Haag",
     "awayTeam": "FC Groningen",
     "homePosition": 15,
-    "awayPosition": 5,
+    "awayPosition": 6,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
@@ -724,16 +724,16 @@
     "utcDate": "2026-08-16T12:30:00Z",
     "homeTeam": "Feyenoord Rotterdam",
     "awayTeam": "Go Ahead Eagles",
-    "homePosition": 6,
+    "homePosition": 7,
     "awayPosition": 2,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "Temkinli",
-    "confidence": "Düşük",
-    "riskLevel": "Yüksek",
-    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
+    "suggestion": "1.5 Üst",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
     "league": "Eredivisie",
@@ -757,15 +757,15 @@
     "homeTeam": "AFC Ajax",
     "awayTeam": "SC Heerenveen",
     "homePosition": 3,
-    "awayPosition": 6,
+    "awayPosition": 7,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "3.5 Alt",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+    "suggestion": "Temkinli",
+    "confidence": "Düşük",
+    "riskLevel": "Yüksek",
+    "suggestionReason": "Veriler net ve güçlü bir düşük risk fırsatı vermiyor."
   },
   {
     "league": "Eredivisie",
@@ -788,15 +788,15 @@
     "utcDate": "2026-08-22T16:45:00Z",
     "homeTeam": "Sparta Rotterdam",
     "awayTeam": "FC Utrecht",
-    "homePosition": 9,
+    "homePosition": 5,
     "awayPosition": 12,
     "homeForm": "-",
     "awayForm": "-",
     "homeFormScore": 0,
     "awayFormScore": 0,
-    "suggestion": "3.5 Alt",
+    "suggestion": "1.5 Üst",
     "confidence": "Orta",
     "riskLevel": "Orta",
-    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   }
 ]
