@@ -161,22 +161,6 @@
   },
   {
     "league": "Primera Division",
-    "utcDate": "2026-11-20T20:00:00Z",
-    "homeTeam": "Athletic Club",
-    "awayTeam": "RCD Espanyol de Barcelona",
-    "homePosition": 7,
-    "awayPosition": 10,
-    "homeForm": "-",
-    "awayForm": "-",
-    "homeFormScore": 0,
-    "awayFormScore": 0,
-    "suggestion": "3.5 Alt",
-    "confidence": "Orta",
-    "riskLevel": "Orta",
-    "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
-  },
-  {
-    "league": "Primera Division",
     "utcDate": "2026-11-21T13:00:00Z",
     "homeTeam": "Deportivo Alavés",
     "awayTeam": "RC Deportivo La Coruña",
@@ -318,6 +302,22 @@
     "confidence": "Orta",
     "riskLevel": "Orta",
     "suggestionReason": "Takımlar birbirine yakın görünüyor, kontrollü maç ihtimali öne çıkıyor."
+  },
+  {
+    "league": "Primera Division",
+    "utcDate": "2026-11-27T20:00:00Z",
+    "homeTeam": "Levante UD",
+    "awayTeam": "Real Racing Club de Santander",
+    "homePosition": 17,
+    "awayPosition": 11,
+    "homeForm": "-",
+    "awayForm": "-",
+    "homeFormScore": 0,
+    "awayFormScore": 0,
+    "suggestion": "1.5 Üst",
+    "confidence": "Orta",
+    "riskLevel": "Orta",
+    "suggestionReason": "Güç farkı nedeniyle maçta en az iki gol çıkma ihtimali öne çıkıyor."
   },
   {
     "league": "Serie A",
